@@ -1,19 +1,16 @@
 import streamlit as st
 import requests
 
+
 def send_data_to_api(name, description, price, tax):
     url = "http://localhost:8000/items/"
-    data = {
-        "name": name,
-        "description": description,
-        "price": price,
-        "tax": tax
-    }
+    data = {"name": name, "description": description, "price": price, "tax": tax}
     response = requests.post(url, json=data)
     return response.json()
 
+
 def main():
-    st.title('Aplicativo Streamlit Integrado com FastAPI')
+    st.title("Aplicativo Streamlit Integrado com FastAPI")
 
     with st.form("my_form"):
         name = st.text_input("Nome do Produto")
@@ -27,5 +24,6 @@ def main():
             st.write("Resposta da API:")
             st.json(response)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

@@ -1,17 +1,21 @@
 import streamlit as st
 
+
 def message_default():
 
     # INICIANDO A MENSAGEM DEFAULT
-    message_default = [{"role": "assistant",
-                        "content": "Olá, eu sou o Score Maker Assistant"}]
+    message_default = [
+        {"role": "assistant", "content": "Olá, eu sou o Score Maker Assistant"}
+    ]
 
     # Opções de ação para o usuário
     actions = ["Definir um novo score", "Editar um score existente"]
     action = st.selectbox("O que você gostaria de fazer?", options=actions)
 
+
 def clear_chat_history():
     st.session_state.messages = message_default
+
 
 # INICIANDO A SESSION STATE DE MENSAGENS
 if "messages" not in st.session_state.keys():
@@ -23,7 +27,7 @@ for message in st.session_state.messages:
         st.write(message["content"])
 
 # CRIANDO O BOTÃO PARA LIMPAR A CONVERSA - SIDEBAR
-st.sidebar.button('Limpar conversa', on_click=clear_chat_history)
+st.sidebar.button("Limpar conversa", on_click=clear_chat_history)
 
 # ESPAÇO PARA O PROMPT
 if prompt := st.chat_input():
@@ -38,7 +42,7 @@ if st.session_state.messages[-1]["role"] != "assistant":
         with st.spinner("Pensando..."):
             response = "Resultado"
             placeholder = st.empty()
-            full_response = ''
+            full_response = ""
             for item in response:
                 full_response += item
                 placeholder.markdown(full_response)
